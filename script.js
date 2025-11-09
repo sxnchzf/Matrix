@@ -1,7 +1,7 @@
 const canvas = document.getElementById("MatrixCanvas")
 const ctx = canvas.getContext("2d")
 let speed = 10;
-let message = "Te Amo♥️"
+let message = "Te Amo"
 let color ="#ff69b4"
 
 function resizeCanvas() {
@@ -83,4 +83,5 @@ function animate(){
     }, 1000 / speed);
 }
 animate();
+
 
