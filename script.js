@@ -4,12 +4,20 @@ let speed = 10;
 let message = "Te Amo"
 let color ="#ff69b4"
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  fontSize = 14;
+  columns = Math.floor(canvas.width / fontSize);
+  drops = Array.from({ length: columns }).fill(1);
+}
+window.addEventListener('resize', resizeCanvas);
 
+// inicializa tamaños
 let fontSize = 14;
-let columns = canvas.width / fontSize
-let drops = Array.from({ length: columns}).fill(1)
+let columns = Math.floor(window.innerWidth / fontSize);
+let drops = Array.from({ length: columns }).fill(1);
+resizeCanvas();
 
 document.getElementById("SpeedControl").addEventListener("input", (e) => {
     speed = parseInt(e.target.value)
@@ -26,7 +34,7 @@ document.getElementById("TextInput").addEventListener("input", (e) => {
 canvas.addEventListener("click", (e) => {
     const x = e.clientX;
     const y = e.clientY;
- explosion(x, y)
+    explosion(x, y)
 });
 
 function explosion (x, y) {
@@ -44,7 +52,7 @@ function animateExplosion(x, y, dx, dy) {
     function frame() {
         if (life <= 0) return;
         ctx.fillStyle = color;
-        ctx.font = "bolt 14px Arial"
+        ctx.font = "bold 14px Arial";
         ctx.fillText(message, x + dx * (30 - life), y + dy * (30 - life)); 
         life--;
         requestAnimationFrame(frame);
@@ -53,7 +61,7 @@ function animateExplosion(x, y, dx, dy) {
 }
 
 function draw() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = color;
     ctx.font = `${fontSize}px Arial`;
